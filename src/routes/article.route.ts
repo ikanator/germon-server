@@ -1,5 +1,5 @@
-import { Router } from "express";
-import { ArticleController } from "../controllers/article.controller";
+import { Router } from 'express';
+import { ArticleController } from '../controllers/article.controller';
 
 class ArticleRoute {
   public router: Router = Router();
@@ -11,12 +11,12 @@ class ArticleRoute {
 
   private config(): void {
     this.router
-      .route("/")
+      .route('/')
       .get(this.articleController.getArticles)
       .post(this.articleController.addNewArticle);
 
     this.router
-      .route("/:id")
+      .route('/:id')
       .get(this.articleController.getArticleByID)
       .put(this.articleController.updateArticle)
       .delete(this.articleController.deleteArticle);

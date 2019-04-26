@@ -1,15 +1,17 @@
-import { Request, Response } from "express";
-import mongoose from "mongoose";
-import { ArticleSchema } from "../models/article";
+import { Request, Response } from 'express';
+import mongoose from 'mongoose';
+import { ArticleSchema } from '../models/article';
 
-const Article = mongoose.model("Article", ArticleSchema);
+const Article = mongoose.model('Article', ArticleSchema);
 
 export class ArticleController {
   public addNewArticle(req: Request, res: Response) {
     const newArticle = new Article(req.body);
 
     newArticle.save((err, article) => {
-      if (err) { res.send(err); }
+      if (err) {
+        res.send(err);
+      }
 
       res.json(article);
     });
@@ -17,7 +19,9 @@ export class ArticleController {
 
   public getArticles(req: Request, res: Response) {
     Article.find({}, (err, articles) => {
-      if (err) { res.send(err); }
+      if (err) {
+        res.send(err);
+      }
 
       res.json(articles);
     });
@@ -25,18 +29,22 @@ export class ArticleController {
 
   public getArticleByID(req: Request, res: Response) {
     Article.findById(req.params.id, (err, article) => {
-      if (err) { res.send(err); }
+      if (err) {
+        res.send(err);
+      }
 
       res.json(article);
     });
   }
 
   public updateArticle(req: Request, res: Response) {
-    Article.findOneAndUpdate({ _id: req.params.id },
+    Article.findOneAndUpdate({_id: req.params.id},
       req.body,
-      { new: true },
+      {new: true},
       (err, article) => {
-        if (err) { res.send(err); }
+        if (err) {
+          res.send(err);
+        }
 
         res.json(article);
       });
@@ -44,11 +52,13 @@ export class ArticleController {
 
   public deleteArticle(req: Request, res: Response) {
     Article.deleteOne(
-      { _id: req.params.id },
+      {_id: req.params.id},
       (err) => {
-        if (err) { res.send(err); }
+        if (err) {
+          res.send(err);
+        }
 
-        res.json({ message: "Successfully deleted article"});
+        res.json({message: 'Successfully deleted article'});
       });
   }
 }

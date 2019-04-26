@@ -1,5 +1,5 @@
-import { Router } from "express";
-import { articleRouter } from "./article.route";
+import { Router } from 'express';
+import { articleRouter } from './article.route';
 
 class Routes {
   public router = Router();
@@ -9,7 +9,7 @@ class Routes {
   }
 
   private config() {
-    this.router.use("/article", articleRouter);
+    this.router.use('/article', articleRouter);
   }
 }
 
