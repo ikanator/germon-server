@@ -1,20 +1,18 @@
 import dotenv from 'dotenv';
 import express from 'express';
-import { connectDb } from './models';
+import * as environment from './config/environment';
 
 // initialize configuration
-dotenv.config();
+dotenv.config({ path: '.env' });
+environment.init();
 
 const app = express();
+
+// connect to DB
+// tslint:disable-next-line:no-empty
+environment.connectDb().then(() => { });
 
 // define a route handler for the default home page
 app.get( '/', ( req, res ) => {
   res.send( 'Hello world!');
-});
-
-connectDb().then( () => {
-  app.listen(process.env.PORT, () => {
-    // tslint:disable-next-line:no-console
-    console.log( `server started at http://localhost:${process.env.PORT}` );
-  });
 });
