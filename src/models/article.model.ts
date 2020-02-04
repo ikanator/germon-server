@@ -1,12 +1,12 @@
-import mongoose, {Schema} from 'mongoose';
-import { IArticleModel } from '../interfaces/article';
+import { model, Schema } from 'mongoose';
+import { IArticleDocument, IArticleModel } from '../interfaces/article';
 
 const articleSchema = new Schema({
-        id: {type: Number, unique: true, readOnly: true},
-        title: {type: String, default: ''},
         content: {type: String, default: ''},
         createdAt: {type: Date, readonly: true},
+        id: {type: Number, unique: true, readOnly: true},
         modifiedAt: {type: Date, readonly: true},
+        title: {type: String, default: ''},
     },
     {
         collection: 'Articles'
@@ -21,8 +21,4 @@ articleSchema.statics.createArticle = async function(data: object): Promise<obje
     return this.create(data);
 };
 
-const ArticleModel = mongoose.model('ArticleModel', articleSchema);
-
-export const Article: IArticleModel = model<IArticleDocument, IArticleModel>('Episode', Entity);
-
-export default ArticleModel;
+export const Article: IArticleModel = model<IArticleDocument, IArticleModel>('ArticleModel', articleSchema);
