@@ -10,7 +10,8 @@
     "quotemark": [
       true,
       "single"
-    ]
+    ],
+    "no-trailing-whitespace": false
   },
   "rulesDirectory": []
 }

@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
 import mongoose from 'mongoose';
-import { ArticleSchema } from '../models/article';
+import { ArticleSchema } from '../models/article.model';
 
 const Article = mongoose.model('Article', ArticleSchema);
 
 export class ArticleController {
-  public addNewArticle(req: Request, res: Response) {
+  public createArticle(req: Request, res: Response) {
     const newArticle = new Article(req.body);
 
     newArticle.save((err, article) => {
@@ -38,7 +38,7 @@ export class ArticleController {
   }
 
   public updateArticle(req: Request, res: Response) {
-    Article.findOneAndUpdate({_id: req.params.id},
+    Article.findOneAndUpdate({ _id: req.params.id },
       req.body,
       {new: true},
       (err, article) => {
@@ -52,13 +52,13 @@ export class ArticleController {
 
   public deleteArticle(req: Request, res: Response) {
     Article.deleteOne(
-      {_id: req.params.id},
+      { _id: req.params.id },
       (err) => {
         if (err) {
           res.send(err);
         }
 
-        res.json({message: 'Successfully deleted article'});
+        res.json({ message: 'Successfully deleted article' });
       });
   }
 }

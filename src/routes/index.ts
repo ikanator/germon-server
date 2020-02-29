@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { articleRouter } from './article.route';
+import { authorRouter } from './author.route';
 
 class Routes {
   public router = Router();
@@ -10,7 +11,8 @@ class Routes {
 
   private config() {
     this.router.use('/article', articleRouter);
+    this.router.use('/author', authorRouter);
   }
 }
 
-export default new Routes().router;
+export default Routes;
