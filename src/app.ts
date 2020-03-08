@@ -1,20 +1,21 @@
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
-import express, { Application } from 'express';
+import express, {Application, Router} from 'express';
 import mongoose from 'mongoose';
 
-import router from './routes/index';
+import Routes from './routes';
 
 class App {
   public app: Application;
   public mongoUrl: string;
+  public router: Router = new Routes().router;
 
   constructor() {
     this.app = express();
     this.config();
 
     // Setup application router
-    this.app.use('/api', router);
+    this.app.use('/api', this.router);
 
     // Setup MongoDB connection
     this.mongoSetup();

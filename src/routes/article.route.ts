@@ -13,7 +13,7 @@ class ArticleRoute {
     this.router
       .route('/')
       .get(this.articleController.getArticles)
-      .post(this.articleController.addNewArticle);
+      .post(this.articleController.createArticle);
 
     this.router
       .route('/:id')
