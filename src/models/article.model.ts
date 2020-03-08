@@ -1,24 +1,30 @@
-import { model, Schema } from 'mongoose';
-import { IArticleDocument, IArticleModel } from '../interfaces/article';
+import { Schema } from 'mongoose';
 
-const articleSchema = new Schema({
-        content: {type: String, default: ''},
-        createdAt: {type: Date, readonly: true},
-        id: {type: Number, unique: true, readOnly: true},
-        modifiedAt: {type: Date, readonly: true},
-        title: {type: String, default: ''},
-    },
-    {
-        collection: 'Articles'
-    }
-);
+const ArticleSchema = new Schema({
+  _id: Number,
+  title: {
+    type: String,
+    required: 'Enter article name'
+  },
+  authorId: Number,
+  created_at: {
+    type: Date,
+    default: Date.now
+  }
+}, {
+  toObject: {
+    virtuals: true
+  },
+  toJSON: {
+    virtuals: true
+  }
+});
 
-articleSchema.statics.findById = async function(id: number): Promise<object> {
-    return this.findOne({id});
-};
+ArticleSchema.virtual('author', {
+  ref: 'Author',
+  localField: 'authorId',
+  foreignField: '_id',
+  justOne: true,
+});
 
-articleSchema.statics.createArticle = async function(data: object): Promise<object> {
-    return this.create(data);
-};
-
-export const Article: IArticleModel = model<IArticleDocument, IArticleModel>('ArticleModel', articleSchema);
+export { ArticleSchema };

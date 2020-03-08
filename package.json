@@ -2,7 +2,7 @@
   "name": "germon-server",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/server.js",
   "scripts": {
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "tsc",
@@ -17,6 +17,7 @@
     "@types/cookie-parser": "^1.4.2",
     "@types/helmet": "0.0.45",
     "@types/mongoose": "^5.3.26",
+    "body-parser": "^1.19.0",
     "@types/morgan": "^1.7.37",
     "cookie-parser": "^1.4.4",
     "dotenv": "^7.0.0",
