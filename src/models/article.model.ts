@@ -1,11 +1,12 @@
 import { Schema } from 'mongoose';
 
 const ArticleSchema = new Schema({
+  _id: Number,
   title: {
     type: String,
     required: 'Enter article name'
   },
-  authorId: String,
+  authorId: Number,
   created_at: {
     type: Date,
     default: Date.now
@@ -22,7 +23,8 @@ const ArticleSchema = new Schema({
 ArticleSchema.virtual('author', {
   ref: 'Author',
   localField: 'authorId',
-  foreignField: '_id'
+  foreignField: '_id',
+  justOne: true,
 });
 
 export { ArticleSchema };

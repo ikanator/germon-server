@@ -27,14 +27,16 @@ export class ArticleController {
     });
   }
 
-  public getArticleByID(req: Request, res: Response) {
-    Article.findById(req.params.id, (err, article) => {
+  public async getArticleByID(req: Request, res: Response) {
+    try {
+      const article = await Article.findById(req.params.id).populate('author');
+
+      res.json(article);
+    } catch (err) {
       if (err) {
         res.send(err);
       }
-
-      res.json(article);
-    });
+    }
   }
 
   public updateArticle(req: Request, res: Response) {
