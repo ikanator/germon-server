@@ -1,7 +1,11 @@
 import { Schema } from 'mongoose';
 
 const AuthorSchema = new Schema({
-  _id: Number,
+  code: {
+    type: String,
+    required: 'Enter author code',
+    unique: true,
+  },
   name: {
     type: String,
     required: 'Enter author name'
